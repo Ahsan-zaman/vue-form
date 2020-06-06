@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/30-day-trial",
+    path: "/nezohr-trial",
     name: "form",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

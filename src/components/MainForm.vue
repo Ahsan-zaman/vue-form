@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <p>
+    <p style="background:#d9d9d9;">
         Form show up ?
     </p>
   </div>
