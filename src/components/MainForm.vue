@@ -1,18 +1,18 @@
 <template>
-  <q-page class="flex flex-center text-white bg-main-image">
+  <q-page class="flex flex-center text-white bg-main-image q-pa-lg">
     <div class="form-wrapper">
-        <div class="flex flex-center top-boxes">
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs q-my-sm rounded-borders"><q-icon size="100px" color="primary" :name="ionCashOutline" />
+        <div class="flex flex-center top-boxes q-mb-lg">
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs rounded-borders"><q-icon size="100px" color="primary" :name="ionCashOutline" />
                 Get started for free
             </div>
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs q-my-sm rounded-borders"><q-icon size="100px" color="primary" :name="fasIdCardAlt" />
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs rounded-borders"><q-icon size="100px" color="primary" :name="fasIdCardAlt" />
                 No credit cards required
             </div>
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs q-my-sm rounded-borders"><q-icon size="100px" color="primary" :name="fasShieldAlt" />
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs rounded-borders"><q-icon size="100px" color="primary" :name="fasShieldAlt" />
                 Full access to all modules
             </div>
         </div>
-        <div class="form-container bg-white q-pa-xl rounded-borders">
+        <div class="form-container bg-white shadow-5 q-pa-xl rounded-borders">
             <q-form
                 @submit="onSubmit"
                 @reset="onReset"
@@ -23,32 +23,98 @@
                 autofocus
                 class="q-gutter-md">
                 <div class="row">
+                    <div class="q-pa-sm q-px-sm col-xs-12 flex text-grey">
+                        <span  class="q-px-sm bg-white">Admin Details </span>
+                        <div class="line"/>
+                    </div>
                     <div class="q-pa-sm col-xs-12 col-md-6">
                         <q-input
-                            v-model="name"
-                            label="Your name *"
-                            hint="Name and surname"
+                            v-model="first_name"
+                            label="First name *"
                             outlined
-                            :rules="[ val => val && val.length > 0 || 'Please type something']"
+                            :rules="[ val => val && val.length > 0 || 'Please type first name']"
                         />
                     </div>
                     <div class="q-pa-sm col-xs-12 col-md-6">
                         <q-input
+                            v-model="last_name"
+                            label="Last name *"
                             outlined
+                            :rules="[ val => val && val.length > 0 || 'Please type last name']"
+                        />
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-input
+                            v-model="email"
+                            label="Email *"
+                            outlined
+                            type="email"
+                            :rules="[ val => !!val || 'Please enter a valide email', isValidEmail]"
+                        />
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-input
+                            v-model="phone"
+                            label="Phone Number *"
+                            hint="eg. 05########"
                             type="number"
-                            v-model="age"
-                            label="Your age *"
-                            :rules="[
-                            val => val !== null && val !== '' || 'Please type your age',
-                            val => val > 0 && val < 100 || 'Please type a real age'
-                            ]"
+                            outlined
+                            :rules="[ val => val && val.length >= 10 || 'Number enter a valid number']"
+                        />
+                    </div>
+                    <div class="q-pa-sm q-px-sm q-mt-md col-xs-12 flex text-grey">
+                        <span  class="q-px-sm bg-white">Company Details </span>
+                        <div class="line"/>
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-input
+                            v-model="company_name"
+                            label="Company Name *"
+                            outlined
+                            :rules="[ val => !!val || 'Please type company name']"
                         />
                     </div>
                     <div class="q-pa-sm col-xs-12 col-md-6">
+                         <q-input
+                            @input="val => { file = val }"
+                            outlined
+                            type="file"
+                            hint="Company Logo. Must be a image file below 512kB"
+                        />
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-select outlined v-model="employee_count" :options="options" label="Number of Employees" />
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-select outlined v-model="industry" :options="industries" label="Industry" />
+                    </div>
+                    <div class="q-pa-sm q-px-sm q-mt-md col-xs-12 flex text-grey">
+                        <span  class="q-px-sm bg-white">Set Password </span>
+                        <div class="line"/>
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-input
+                            v-model="password"
+                            label="Password *"
+                            type="password"
+                            outlined
+                            :rules="[ val => val && val.length >= 8 || 'Password must be 8 characters long', isValidPass]"
+                        />
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-input
+                            v-model="password_confirm"
+                            label="Enter password again *"
+                            type="password"
+                            outlined
+                            :rules="[ val => val && password == val || `Password & Confirm password doesn't match`]"
+                        />
+                    </div>
+                    <div class="q-pa-sm col-xs-12 col-md-6 text-dark">
                         <q-toggle v-model="accept" label="I accept the license and terms" />
                     </div>
-                    <div class="q-pa-sm col-12">
-                        <q-btn label="Submit" type="submit" color="secondary"/>
+                    <div class="q-pa-sm col-12 flex">
+                        <q-btn class="q-ml-auto" label="Submit" type="submit" color="secondary"/>
                         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
                     </div>
                 </div>
@@ -66,12 +132,64 @@ export default {
   props: {
     msg: String
   },
-  data(){
+  data : function() {
       return{
-        name: null,
-        age: null,
-
-        accept: false
+        first_name: null,
+        last_name: null,
+        email: null,
+        phone: null,
+        company_name: null,
+        password: null,
+        password_confirm: null,
+        employee_count: null,
+        options: [
+            '1 - 10', 
+            'more than 10',
+            'more than 100',
+            'more than 1000',
+            'more than 10000',
+        ],
+        industry:null,
+        industries:[
+            "Accommodation and food service activities",
+            "Activities of extraterritorial organizations and bodies",
+            "Activities of households as employers; undifferentiated goods- and services-producing activities of households for own use",
+            "Administrative and support service activities",
+            "Aerospace",
+            "Agriculture",
+            "Arts, entertainment and recreation",
+            "Automotive",
+            "Business Services/Consultancy",
+            "Computer / Technology-Reseller",
+            "Computer / Technology-Services",
+            "Computer / Technology-Manufacturer",
+            "Construction",
+            "Education",
+            "Electricity, gas, steam and air conditioning supply",
+            "Finance / Banking / Insurance / Real Estate / Legal",
+            "Forestry and fishing",
+            "Government-National / Federal",
+            "Government-Local",
+            "Human health and social work activities",
+            "Information and communication",
+            "Media / Marketing / Entertainment / Publishing / PR",
+            "Mining and quarrying",
+            "Manufacturing",
+            "Other service activities",
+            "Public administration and defence; compulsory social security",
+            "Professional, scientific and technical activities",
+            "Real estate activities",
+            "Retail",
+            "Telecoms/Communications",
+            "Transportation and storage",
+            "Travel / Tourism",
+            "Water supply; sewerage, waste management and remediation activities",
+            "Wholesale and retail trade; repair of motor vehicles and motorcycles",
+            "Other"
+        ],
+        accept: false,
+        file: "",
+        
       }
   },
   created () {
@@ -88,20 +206,61 @@ export default {
           icon: 'warning',
           message: 'You need to accept the license and terms first'
         })
+      }else if (this.file.length == 0){
+          this.$q.notify({
+          type: 'negative',
+          textColor: 'white',
+          icon: 'warning',
+          message: 'You need to upload a company logo',
+        })
       }
       else {
-        this.$q.notify({
+        const dismissed = this.$q.notify({
           type: 'positive',
           textColor: 'white',
-          message: 'Submitted'
+          message: 'An Email has been sent to your account',
+            timeout: 0,
+            actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
         })
       }
     },
 
     onReset () {
-      this.name = null
-      this.age = null
+      this.first_name = null
+      this.last_name = null
+      this.email = null
+      this.company_name = null
+      this.phone = null
+      this.file = null
+      this.industry = null
+      this.employee_count = null
+      this.password = null
+      this.password_confirm = null
       this.accept = false
+    },
+    isValidEmail (val) {
+        const emailPattern = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
+        return emailPattern.test(val) || 'Invalid email';
+    },
+    isValidPass (val) {
+        const lower_case = /^(?=.*[a-z])/;
+        const upper_case = /^(?=.*[A-Z])/;
+        const number = /^(?=.*[0-9])/;
+        const special = /^(?=.*[!@#$%^&*])/;
+        let d = "Password must contain "
+        if(!lower_case.test(val)){
+            d += "a lower case letter,"
+        }
+        if(!upper_case.test(val)){
+            d += "an upper case letter,"
+        }
+        if(!number.test(val)){
+            d += "a number,"
+        }
+        if(!special.test(val)){
+            d += "a special character,"
+        }
+        return d === "Password must contain " || d ;
     }
   }
 }
@@ -128,14 +287,19 @@ export default {
   }
 .form-wrapper{
     width: 100%;
-    max-width: 1170px;
+    max-width: 980px;
     z-index: 1;
 }
-/* .top-boxes{
-    background: rgb(251,184,71);
-    background: linear-gradient(9deg, rgba(251,184,71,1) 0%, rgba(91,209,192,1) 100%);;
-} */
+.top-boxes{
+    justify-content: space-around;
+}
 .box{
-    min-width: 193px;
+    min-width: 200px;
+}
+.line{
+    flex-grow: 1;
+    height: 1px;
+    background: grey;
+    align-self: center;
 }
 </style>

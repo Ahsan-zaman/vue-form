@@ -91,7 +91,7 @@ export default {
     MainForm,
     TopNav
   },
-  data (){
+  data: function(){
       return {
       leftDrawerOpen: false
     }

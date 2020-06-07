@@ -22,6 +22,7 @@ import {
   QForm,
   QInput,
   QToggle,
+  QSelect,
   Notify,
 } from "quasar";
 
@@ -44,6 +45,7 @@ Vue.use(Quasar, {
     QForm,
     QInput,
     QToggle,
+    QSelect,
   },
   directives: {},
   plugins: {
