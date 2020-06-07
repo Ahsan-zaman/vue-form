@@ -1,11 +1,11 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import './styles/quasar.sass'
-import 'quasar/dist/quasar.ie.polyfills'
-import '@quasar/extras/roboto-font/roboto-font.css'
-import '@quasar/extras/material-icons/material-icons.css'
+import "./styles/quasar.sass";
+import "quasar/dist/quasar.ie.polyfills";
+import "@quasar/extras/roboto-font/roboto-font.css";
+import "@quasar/extras/material-icons/material-icons.css";
 import {
-  Quasar, 
+  Quasar,
   QLayout,
   QHeader,
   QDrawer,
@@ -19,7 +19,11 @@ import {
   QItem,
   QItemSection,
   QItemLabel,
-} from 'quasar'
+  QForm,
+  QInput,
+  QToggle,
+  Notify,
+} from "quasar";
 
 Vue.use(Quasar, {
   config: {},
@@ -37,9 +41,12 @@ Vue.use(Quasar, {
     QItem,
     QItemSection,
     QItemLabel,
+    QForm,
+    QInput,
+    QToggle,
   },
-  directives: {
-  },
+  directives: {},
   plugins: {
-  }
- })
+    Notify,
+  },
+});

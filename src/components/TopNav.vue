@@ -4,7 +4,7 @@
           <a href="/" class="logo">
               <img src="../assets/logo.png" alt="" srcset="">
           </a>
-          <ul>
+          <ul class="gt-sm">
               <li><a href="/features">Features</a></li>
               <li><a href="/about-us">Aout Us</a></li>
               <li><a href="/services">Services</a></li>
