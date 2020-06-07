@@ -1,22 +1,19 @@
 <template>
   <div class="nav-container">
       <nav>
-          <div class="logo">
+          <a href="/" class="logo">
               <img src="../assets/logo.png" alt="" srcset="">
-          </div>
+          </a>
           <ul>
-              <li><a href="#">Features</a></li>
-              <li><a href="#">Aout Us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Partners</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><a href="/features">Features</a></li>
+              <li><a href="/about-us">Aout Us</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/partners/integration-partnership-program/">Partners</a></li>
+              <li><a href="/contact-us">Contact Us</a></li>
           </ul>
           <div class="more">
-              <a href="#" class="get_started">Get Started Now</a>
-              <div class="lang">
-                  <a href="#" class="en">En</a>
-                  <a href="#" class="ar">Ar</a>
-              </div>
+            <router-link to="/" class="en">EN</router-link>
+            <router-link to="#" class="ar">AR</router-link>
           </div>
       </nav>
   </div>
@@ -24,7 +21,7 @@
 
 <script>
 export default {
-
+name: 'top-nav'
 }
 </script>
 
@@ -62,15 +59,24 @@ nav ul li a{
     font-size: 14px;
     color: #777777;
 }
+nav ul li a:hover{
+    color: #2f2d2b;
+}
 nav div.more{
     display: flex;
     margin-left: auto;
+    align-items: center;
 }
-nav div.more a.get_started{
-    padding: 7px 15px;
+nav div.more a{
     font-size: 14px;
-    background-color: var(--main-bg-color);
-    color: #ffffff;
+    padding: 15px 5px;
+}
+nav div.more a:not(:active):hover{
+    color: #2f2d2b;
+}
+
+.router-link-active{
+    color: #5BD1C0;
 }
 </style>
 
