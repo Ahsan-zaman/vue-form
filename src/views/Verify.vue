@@ -1,14 +1,14 @@
 <template>
-  <MainForm />
+  <verifyForm/>
 </template>
 
 <script>
 // @ is an alias to /src
-import MainForm from '@/components/MainForm.vue'
+import VerifyForm from '@/components/VerifyForm.vue'
 
 export default {
   components: {
-    MainForm,
+    VerifyForm,
   },
   data: function(){
       return {

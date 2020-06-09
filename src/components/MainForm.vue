@@ -78,6 +78,7 @@
                          <q-input
                             @input="val => { file = val }"
                             outlined
+                            accept=".jpg, image/*"
                             type="file"
                             hint="Company Logo. Must be a image file below 512kB"
                         />
@@ -215,13 +216,37 @@ export default {
         })
       }
       else {
-        const dismissed = this.$q.notify({
-          type: 'positive',
-          textColor: 'white',
-          message: 'An Email has been sent to your account',
-            timeout: 0,
-            actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
-        })
+            let form = new FormData()
+            form.append('first_name', this.first_name)
+            form.append('last_name', this.last_name)
+            form.append('email', this.email)
+            form.append('phone', this.phone)
+            form.append('password', this.password)
+            form.append('password_confirmation', this.password_confirm)
+            form.append('company_name', this.company_name)
+            form.append('company_logo', this.file)
+            form.append('employee_count', this.employee_count)
+            form.append('industry', this.industry)
+            form.append('cr', this.cr)
+
+
+          fetch('https://app.nezohr.com/api/auth/company-registration',{
+              method : 'POST',
+              headers : {
+                  'Accept' : 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body : form
+          }).then( () => {
+                const dismissed = this.$q.notify({
+                    type: 'positive',
+                    textColor: 'white',
+                    message: 'An Email has been sent to your account',
+                    timeout: 0,
+                    actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
+                })
+          }).catch(err => console.log(err))
+        
       }
     },
 
