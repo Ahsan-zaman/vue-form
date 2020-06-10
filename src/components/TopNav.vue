@@ -70,13 +70,14 @@ nav div.more{
 nav div.more a{
     font-size: 14px;
     padding: 15px 5px;
+    color: #777777;
 }
-nav div.more a:not(:active):hover{
+nav div.more a:hover{
     color: #2f2d2b;
 }
 
 .router-link-active{
-    color: #5BD1C0;
+    color: #5BD1C0 !important;
 }
 </style>
 

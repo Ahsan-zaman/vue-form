@@ -60,17 +60,25 @@
         <router-view>
         </router-view>
     </q-page-container>
+    <Footer/>
   </q-layout>
 </template>
 
 <script>
 import TopNav from '@/components/TopNav.vue'
+import Footer from '@/components/Footer.vue'
 
 
 export default {
   components: {
+    Footer,
     TopNav,
   },
+  data: ()=>{
+      return{
+          leftDrawerOpen:false
+      }
+  }
 }
 </script>
 

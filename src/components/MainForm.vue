@@ -13,6 +13,7 @@
             </div>
         </div>
         <div class="form-container bg-white shadow-5 q-pa-xl rounded-borders">
+            <h4 class="q-ma-sm text-secondary">NezoHR Registration form</h4>
             <q-form
                 @submit="onSubmit"
                 @reset="onReset"
@@ -135,11 +136,11 @@ export default {
   },
   data : function() {
       return{
-        first_name: null,
-        last_name: null,
-        email: null,
-        phone: null,
-        company_name: null,
+        first_name: 'null',
+        last_name: 'null',
+        email: 'null@null.com',
+        phone: '0571708606',
+        company_name: 'null',
         password: null,
         password_confirm: null,
         employee_count: null,
@@ -188,8 +189,9 @@ export default {
             "Wholesale and retail trade; repair of motor vehicles and motorcycles",
             "Other"
         ],
-        accept: false,
+        accept: true,
         file: "",
+        status : null
         
       }
   },
@@ -224,28 +226,60 @@ export default {
             form.append('password', this.password)
             form.append('password_confirmation', this.password_confirm)
             form.append('company_name', this.company_name)
-            form.append('company_logo', this.file)
+            // form.append('company_logo', this.file)
+            this.file.forEach(f =>{
+                form.append('company_logo',f)
+            })
             form.append('employee_count', this.employee_count)
             form.append('industry', this.industry)
             form.append('cr', this.cr)
 
+            console.log(form)
 
           fetch('https://app.nezohr.com/api/auth/company-registration',{
               method : 'POST',
               headers : {
                   'Accept' : 'application/json',
-                  'Content-Type': 'application/json'
               },
               body : form
-          }).then( () => {
+          })
+          .then( response => {
+              let resp = response.clone()
+                this.status = resp.status
+                return resp.json();
+          })
+          .then( (res) => {
+              if(this.status >= 400 && this.status < 600){
+                if(this.status == 422){
+                    for(let [key, value] of Object.entries(res.errors)) {
+                        let dismissed = this.$q.notify({
+                            type: 'negative',
+                            textColor: 'white',
+                            icon: 'warning',
+                            message: `${key} : ${value}`,
+                            timeout : 0,
+                            actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
+                        })
+                    }
+                }
+              }else{
                 const dismissed = this.$q.notify({
                     type: 'positive',
                     textColor: 'white',
-                    message: 'An Email has been sent to your account',
+                    message: 'An Email has been sent to verify your account.',
                     timeout: 0,
                     actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
                 })
-          }).catch(err => console.log(err))
+              }
+          })
+          .catch( () => {
+                this.$q.notify({
+                    type: 'negative',
+                    textColor: 'white',
+                    icon: 'warning',
+                    message: `Couldn't connect to server. Please try again later.`
+                })
+          })
         
       }
     },
