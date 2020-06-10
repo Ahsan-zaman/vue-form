@@ -23,6 +23,7 @@ import {
   QInput,
   QToggle,
   QSelect,
+  QSpinnerGears,
   Notify,
 } from "quasar";
 
@@ -46,6 +47,7 @@ Vue.use(Quasar, {
     QInput,
     QToggle,
     QSelect,
+    QSpinnerGears,
   },
   directives: {},
   plugins: {

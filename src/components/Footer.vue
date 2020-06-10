@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-center column">
-      <div class="flex flex-center bg-secondary text-white full-width q-px-xl">
+      <div class="flex flex-center bg-secondary text-white full-width q-pa-md">
           <div class="flex flex-center justify-between full-width" style="max-width:1170px">
               <h5 class="text-center q-my-sm" style="flex:1">
                     With NezoHR;<br>

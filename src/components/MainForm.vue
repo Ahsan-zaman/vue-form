@@ -116,8 +116,12 @@
                         <q-toggle v-model="accept" label="I accept the license and terms" />
                     </div>
                     <div class="q-pa-sm col-12 flex">
-                        <q-btn class="q-ml-auto" label="Submit" type="submit" color="secondary"/>
-                        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+                        <q-btn :loading="loading" :disable="loading" class="q-ml-auto" label="Submit" type="submit" color="secondary">
+                            <template v-slot:loading>
+                                <q-spinner-gears />
+                            </template>
+                        </q-btn>
+                        <q-btn label="Reset" type="reset" :disable="loading" color="primary" flat class="q-ml-sm" />
                     </div>
                 </div>
             </q-form>
@@ -136,11 +140,11 @@ export default {
   },
   data : function() {
       return{
-        first_name: 'null',
-        last_name: 'null',
-        email: 'null@null.com',
-        phone: '0571708606',
-        company_name: 'null',
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: null,
+        company_name: '',
         password: null,
         password_confirm: null,
         employee_count: null,
@@ -191,8 +195,8 @@ export default {
         ],
         accept: true,
         file: "",
-        status : null
-        
+        status : null,
+        loading : false        
       }
   },
   created () {
@@ -202,6 +206,7 @@ export default {
   },
   methods: {
     onSubmit () {
+        this.loading = true
       if (this.accept !== true) {
         this.$q.notify({
           type: 'negative',
