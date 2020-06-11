@@ -7,19 +7,19 @@
                     Our clients have tracked
                 </h5>
                 <div class="flex text-no-wrap">
-                    <div class="flex column text-center flex-center q-px-xl" style="flex:1">
+                    <div class="flex column text-center flex-center" :class="$q.screen.gt.xs ? 'q-px-xl' : 'q-px-md'" style="flex:1">
                         <h6 class="q-my-xs">10+ Millions</h6>
                         <span>Leave Requests</span>
                     </div>
-                    <div class="flex column text-center flex-center q-px-xl" style="flex:1">
+                    <div class="flex column text-center flex-center" :class="$q.screen.gt.xs ? 'q-px-xl' : 'q-px-md'" style="flex:1">
                         <h6 class="q-my-xs">4+ Millions</h6>
                         <span>Active Users</span>
                     </div>
-                    <div class="flex column text-center flex-center q-px-xl" style="flex:1">
+                    <div class="flex column text-center flex-center" :class="$q.screen.gt.xs ? 'q-px-xl' : 'q-px-md'" style="flex:1">
                         <h6 class="q-my-xs">Over 100</h6>
                         <span>Countries</span>
                     </div>
-                    <div class="flex column text-center flex-center q-px-xl" style="flex:1">
+                    <div class="flex column text-center flex-center" :class="$q.screen.gt.xs ? 'q-px-xl' : 'q-px-md'" style="flex:1">
                         <h6 class="q-my-xs">500,000+</h6>
                         <span>Operating Vacancies</span>
                     </div>

@@ -1,19 +1,19 @@
 <template>
-  <q-page class="flex flex-center text-white bg-main-image q-pa-lg">
+  <q-page :class="$q.screen.gt.xs ? 'q-pa-lg' : 'q-pa-xs'" class="flex flex-center text-white bg-main-image">
     <div class="form-wrapper">
         <div class="flex flex-center top-boxes q-mb-lg">
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs rounded-borders"><q-icon size="100px" color="primary" :name="ionCashOutline" />
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="ionCashOutline" />
                 Get started for free
             </div>
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs rounded-borders"><q-icon size="100px" color="primary" :name="fasIdCardAlt" />
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="fasIdCardAlt" />
                 No credit cards required
             </div>
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-mx-xs rounded-borders"><q-icon size="100px" color="primary" :name="fasShieldAlt" />
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="fasShieldAlt" />
                 Full access to all modules
             </div>
         </div>
-        <div class="form-container bg-white shadow-5 q-pa-xl rounded-borders">
-            <h4 class="q-ma-sm text-secondary">NezoHR Registration form</h4>
+        <div :class="$q.screen.gt.xs ? 'q-pa-xl' : 'q-pa-xs'" class="form-container bg-white shadow-5 rounded-borders">
+            <h4 class="q-ma-sm text-secondary">NezoHR Registration Form</h4>
             <q-form
                 @submit="onSubmit"
                 @reset="onReset"
@@ -256,7 +256,7 @@ export default {
                 return resp.json();
           })
           .then( (res) => {
-              console.log('res', res)
+            //   console.log('res', res)
               if(this.status >= 400 && this.status < 600){
                 if(this.status == 422){
                     for(let value of Object.entries(res.errors)) {
@@ -264,17 +264,26 @@ export default {
                             type: 'negative',
                             textColor: 'white',
                             icon: 'warning',
-                            message: `${value}`,
+                            message: value[1],
                             timeout : 0,
                             actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
                         })
                     }
+                }else{
+                    let dismissed = this.$q.notify({
+                        type: 'negative',
+                        textColor: 'white',
+                        icon: 'warning',
+                        message: res.message,
+                        timeout : 0,
+                        actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
+                    })
                 }
               }else{
                 const dismissed = this.$q.notify({
                     type: 'positive',
                     textColor: 'white',
-                    message: 'An Email has been sent to verify your account.',
+                    message: res.message,
                     timeout: 0,
                     actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
                 })
@@ -363,6 +372,7 @@ export default {
 }
 .box{
     min-width: 200px;
+    flex-grow: 1;
 }
 .line{
     flex-grow: 1;

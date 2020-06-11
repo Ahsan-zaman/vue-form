@@ -2,26 +2,81 @@
   <div class="nav-container">
       <nav>
           <a href="/" class="logo">
-              <img src="https://nezohr.com/assets/img/logo.png" alt="" srcset="">
+              <img src="https://nezohr.com/assets/img/logo.png" alt="LOGO" srcset="">
           </a>
           <ul class="gt-sm">
-              <li><a href="/features">Features</a></li>
-              <li><a href="/about-us">Aout Us</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/partners/integration-partnership-program/">Partners</a></li>
-              <li><a href="/contact-us">Contact Us</a></li>
+              <li v-for="(n,i) in navItems" :key="i"><a :href="n.link">{{n.name}}</a></li>
           </ul>
           <div class="more">
-            <router-link to="/" class="en">EN</router-link>
-            <router-link to="#" class="ar">AR</router-link>
+            <router-link class="gt-xs" to="/">EN</router-link>
+            <router-link class="gt-xs" to="#">AR</router-link>
+          <q-btn class="xs" @click="leftDrawerOpen = !leftDrawerOpen" color="grey" outline tile flat>
+              <q-icon :name="ionMenuOutline" />
+          </q-btn>
           </div>
       </nav>
+      <q-drawer
+        side="right"
+        overlay
+        bordered
+        v-model="leftDrawerOpen"
+        content-class="bg-white text-grey-9 ">
+        <q-list></q-list>
+        <q-list class="flex justify-center column full-height">
+            <q-item  clickable @click="leftDrawerOpen = !leftDrawerOpen">
+                
+                <q-item-section >
+                    <q-item-label>CLOSE</q-item-label>
+                </q-item-section>
+                <q-item-section avatar>
+                    <q-icon :name="ionCloseCircleOutline" />
+                </q-item-section>
+            </q-item>
+            <q-item v-for="(n,i) in navItems" :key="i" clickable tag="a" target="_blank" :href="n.link">
+                <q-item-section>
+                    <q-item-label>{{n.name}}</q-item-label>
+                </q-item-section>
+            </q-item>
+        </q-list>
+    </q-drawer>
   </div>
 </template>
 
 <script>
+import { ionMenuOutline, ionCloseCircleOutline } from '@quasar/extras/ionicons-v5'
 export default {
-name: 'top-nav'
+name: 'top-nav',
+data : () => {
+    return {
+        leftDrawerOpen:false,
+        navItems : [
+            {
+                name : 'Features',
+                link : '/features'
+            },
+            {
+                name : 'About-Us',
+                link : '/about-us'
+            },
+            {
+                name : 'Services',
+                link : '/services'
+            },
+            {
+                name : 'Partners',
+                link : '/partners/integration-partnership-program/'
+            },
+            {
+                name : 'Contact-Us',
+                link : '/contact-us'
+            },
+        ]
+    }
+},
+created(){
+    this.ionMenuOutline = ionMenuOutline
+    this.ionCloseCircleOutline = ionCloseCircleOutline
+}
 }
 </script>
 
