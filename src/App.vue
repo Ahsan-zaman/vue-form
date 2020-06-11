@@ -2,7 +2,7 @@
       <q-layout view="lHh Lpr lFf">
         <top-nav/>
 
-    <q-drawer
+    <!-- <q-drawer
             v-model="leftDrawerOpen"
             bordered
             content-class="bg-grey-2">
@@ -54,7 +54,7 @@
             </q-item-section>
             </q-item>
             </q-list>
-    </q-drawer>
+    </q-drawer> -->
 
     <q-page-container>
         <router-view>

@@ -239,8 +239,9 @@ export default {
             form.append('industry', this.industry)
             form.append('cr', this.cr)
 
-            console.log(form)
+            // console.log(form)
 
+        //   fetch('http://localhost:8000/api/auth/company-registration',{
           fetch('https://app.nezohr.com/api/auth/company-registration',{
               method : 'POST',
               headers : {
@@ -250,18 +251,20 @@ export default {
           })
           .then( response => {
               let resp = response.clone()
+              console.log('resp', resp)
                 this.status = resp.status
                 return resp.json();
           })
           .then( (res) => {
+              console.log('res', res)
               if(this.status >= 400 && this.status < 600){
                 if(this.status == 422){
-                    for(let [key, value] of Object.entries(res.errors)) {
+                    for(let value of Object.entries(res.errors)) {
                         let dismissed = this.$q.notify({
                             type: 'negative',
                             textColor: 'white',
                             icon: 'warning',
-                            message: `${key} : ${value}`,
+                            message: `${value}`,
                             timeout : 0,
                             actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
                         })
@@ -276,6 +279,7 @@ export default {
                     actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
                 })
               }
+              this.loading = false
           })
           .catch( () => {
                 this.$q.notify({
@@ -284,8 +288,8 @@ export default {
                     icon: 'warning',
                     message: `Couldn't connect to server. Please try again later.`
                 })
+                this.loading = false
           })
-        
       }
     },
 

@@ -66,65 +66,74 @@ export default {
             ]
         }
     },
+    beforeCreate(){
+        if(!this.$route.query.q){
+            this.$router.push('/')
+        }
+    },
     mounted(){
         this.textAnim()
 
-        // fetch('https://app.nezohr.com/api/auth/company-registration-confirm',{
-        //       method : 'POST',
-        //       headers : {
-        //           'Accept' : 'application/json',
-        //       },
-        //       body : JSON.stringify({
-        //           q : this.$route.query.q
-        //       })
-        //   })
-        //   .then( response => {
-        //       let resp = response.clone()
-        //         this.status = resp.status
-        //         return resp.json();
-        //   })
-        //   .then( (res) => {
-        //       if(this.status >= 400 && this.status < 600){
-        //           this.loading = false
-        //         this.error = true
-        //         clearInterval(this.refreshIntervalId)
-        //         this.text = 'There was a problem. Please try again later'
-        //         this.show = true
-        //         let dismissed = this.$q.notify({
-        //             type: 'negative',
-        //             textColor: 'white',
-        //             icon: 'warning',
-        //             message: res.message,
-        //             timeout : 0,
-        //             actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
-        //         })
-        //       }else{
-        //         this.loading = false
-        //         this.success = true
-        //         this.anim_svg = true
-        //         clearInterval(this.refreshIntervalId)
-        //         this.text = 'Your Account is Ready'
-        //         this.show = true
+        let q = new FormData()
+        q.append('q', this.$route.query.q)
+        // fetch('http://localhost:8000/api/auth/company-registration-confirm',{
+        fetch('https://app.nezohr.com/api/auth/company-registration-confirm',{
+              method : 'POST',
+              headers : {
+                  'Accept' : 'application/json',
+              },
+              body : q
+          })
+          .then( response => {
+              let resp = response.clone()
+                this.status = resp.status
+                return resp.json();
+          })
+          .then( (res) => {
+              if(this.status >= 400 && this.status < 600){
+                  this.loading = false
+                this.error = true
+                clearInterval(this.refreshIntervalId)
+                this.text = 'There was a problem. Please try again later'
+                this.show = true
+                let dismissed = this.$q.notify({
+                    type: 'negative',
+                    textColor: 'white',
+                    icon: 'warning',
+                    message: res.message,
+                    timeout : 0,
+                    actions:[ { label: 'Okay', color: 'white', handler: () => { 
+                        dismissed()
+                        this.$router.push('/')
+                    } } ]
+                })
+              }else{
+                this.loading = false
+                this.success = true
+                this.anim_svg = true
+                clearInterval(this.refreshIntervalId)
+                this.text = 'Your Account is Ready'
+                this.show = true
 
-        //         this.$q.notify({
-        //             type: 'positive',
-        //             textColor: 'white',
-        //             message: 'Go to log in page ? ',
-        //             timeout : 0,
-        //             actions:[ { label: 'Yes', color: 'white', handler: () => { 
-        //                 window.location.href = `https://app.nezohr.com/login?company=${res.name}`;
-        //              } } ]
-        //         })
-        //       }
-        //   })
-        //   .catch( () => {
-        //         this.$q.notify({
-        //             type: 'negative',
-        //             textColor: 'white',
-        //             icon: 'warning',
-        //             message: `Couldn't connect to server. Please try again later.`
-        //         })
-        //   })
+                this.$q.notify({
+                    type: 'positive',
+                    textColor: 'white',
+                    message: 'Go to log in page ? ',
+                    timeout : 0,
+                    actions:[ { label: 'Yes', color: 'white', handler: () => { 
+                        window.location.href = `https://app.nezohr.com/login?company=${res.name}`;
+                     } } ]
+                })
+              }
+          })
+          .catch( () => {
+                this.$q.notify({
+                    type: 'negative',
+                    textColor: 'white',
+                    icon: 'warning',
+                    message: `Couldn't connect to server. Please try again later.`
+                })
+          })
     },
     methods:{
         textAnim(){

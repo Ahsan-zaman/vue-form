@@ -16,6 +16,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Verify.vue"),
   },
+  {
+    path: "/*",
+    name: "redirect",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Redirect.vue"),
+  },
 ];
 
 const router = new VueRouter({

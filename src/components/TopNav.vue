@@ -2,7 +2,7 @@
   <div class="nav-container">
       <nav>
           <a href="/" class="logo">
-              <img src="../assets/logo.png" alt="" srcset="">
+              <img src="https://nezohr.com/assets/img/logo.png" alt="" srcset="">
           </a>
           <ul class="gt-sm">
               <li><a href="/features">Features</a></li>

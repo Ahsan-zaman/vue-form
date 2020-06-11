@@ -6,21 +6,21 @@
                     With NezoHR;<br>
                     Our clients have tracked
                 </h5>
-                <div class="flex">
+                <div class="flex text-no-wrap">
                     <div class="flex column text-center flex-center q-px-xl" style="flex:1">
-                        <h6 class="text-no-wrap q-my-xs">10+ Millions</h6>
+                        <h6 class="q-my-xs">10+ Millions</h6>
                         <span>Leave Requests</span>
                     </div>
                     <div class="flex column text-center flex-center q-px-xl" style="flex:1">
-                        <h6 class="text-no-wrap q-my-xs">4+ Millions</h6>
+                        <h6 class="q-my-xs">4+ Millions</h6>
                         <span>Active Users</span>
                     </div>
                     <div class="flex column text-center flex-center q-px-xl" style="flex:1">
-                        <h6 class="text-no-wrap q-my-xs">Over 100</h6>
+                        <h6 class="q-my-xs">Over 100</h6>
                         <span>Countries</span>
                     </div>
                     <div class="flex column text-center flex-center q-px-xl" style="flex:1">
-                        <h6 class="text-no-wrap q-my-xs">500,000+</h6>
+                        <h6 class="q-my-xs">500,000+</h6>
                         <span>Operating Vacancies</span>
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                 <div>
                     <a class="q-pa-xs" target="_blank" href="#"><q-icon size="18px" color="primary" :name="ionLogoYoutube" /></a>
                 <a class="q-pa-xs" target="_blank" href="#"><q-icon size="18px" color="primary" :name="ionLogoTwitter" /></a>
-                <a class="q-pa-xs" target="_blank" href="#"><q-icon size="18px" color="primary" :name="ionLogoFacebook" /></a>
+                <a class="q-pl-xs" target="_blank" href="#"><q-icon size="18px" color="primary" :name="ionLogoFacebook" /></a>
                 </div>
-                <span class="q-my-sm text-wrap">NezoHR © {{new Date().toISOString().substr(0,4)}} <br> All Rights Reserved.</span>
+                <span class="q-my-sm text-wrap">NezoHR © {{new Date().toISOString().substr(0,4)}} <br> All Rights Reserved</span>
               </div>
           </div>
       </div>
