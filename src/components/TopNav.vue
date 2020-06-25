@@ -50,10 +50,10 @@ data : () => {
     return {
         leftDrawerOpen:false,
         navItems : [
-            {
-                name : 'Features',
-                link : '/features'
-            },
+            // {
+            //     name : 'Features',
+            //     link : '/features'
+            // },
             {
                 name : 'About-Us',
                 link : '/about-us'
@@ -62,10 +62,10 @@ data : () => {
                 name : 'Services',
                 link : '/services'
             },
-            {
-                name : 'Partners',
-                link : '/partners/integration-partnership-program/'
-            },
+            // {
+            //     name : 'Partners',
+            //     link : '/partners/integration-partnership-program/'
+            // },
             {
                 name : 'Contact-Us',
                 link : '/contact-us'
