@@ -5,8 +5,8 @@
             <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="ionCashOutline" />
                 Get started for free
             </div>
-            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="fasIdCardAlt" />
-                No credit cards required
+            <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="ionPeople" />
+                HR Management Software
             </div>
             <div class="box bg-white shadow-5 flex flex-center text-dark column q-pa-md q-ma-sm rounded-borders"><q-icon size="100px" color="primary" :name="fasShieldAlt" />
                 Full access to all modules
@@ -31,17 +31,26 @@
                     <div class="q-pa-sm col-xs-12 col-md-6">
                         <q-input
                             v-model="first_name"
-                            label="First name *"
+                            label="User name *"
                             outlined
                             :rules="[ val => val && val.length > 0 || 'Please type first name']"
                         />
                     </div>
-                    <div class="q-pa-sm col-xs-12 col-md-6">
+                    <!-- <div class="q-pa-sm col-xs-12 col-md-6">
                         <q-input
                             v-model="last_name"
                             label="Last name *"
                             outlined
                             :rules="[ val => val && val.length > 0 || 'Please type last name']"
+                        />
+                    </div> -->
+                    
+                    <div class="q-pa-sm col-xs-12 col-md-6">
+                        <q-input
+                            v-model="company_name"
+                            label="Company Name *"
+                            outlined
+                            :rules="[ val => !!val || 'Please type company name']"
                         />
                     </div>
                     <div class="q-pa-sm col-xs-12 col-md-6">
@@ -53,26 +62,40 @@
                             :rules="[ val => !!val || 'Please enter a valide email', isValidEmail]"
                         />
                     </div>
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="q-pa-sm col-xs-12 col-md-6">
+                            <q-input
+                                v-model="password"
+                                label="Password *"
+                                type="password"
+                                outlined
+                                :rules="[ val => val && val.length >= 8 || 'Password must be 8 characters long', isValidPass]"
+                            />
+                        </div>
+                        <div class="q-pa-sm col-xs-12 col-md-6">
+                            <q-input
+                                v-model="password_confirm"
+                                label="Enter password again *"
+                                type="password"
+                                outlined
+                                :rules="[ val => val && password == val || `Password & Confirm password doesn't match`]"
+                            />
+                        </div>
+                        </div>
+                    </div>
+                    <div class="q-pa-sm q-px-sm q-mt-md col-xs-12 flex text-grey">
+                        <span  class="q-px-sm bg-white">Other Details </span>
+                        <div class="line"/>
+                    </div>
+                    
                     <div class="q-pa-sm col-xs-12 col-md-6">
                         <q-input
                             v-model="phone"
-                            label="Phone Number *"
+                            label="Phone Number"
                             hint="eg. 05########"
                             type="number"
                             outlined
-                            :rules="[ val => val && val.length >= 10 || 'Number enter a valid number']"
-                        />
-                    </div>
-                    <div class="q-pa-sm q-px-sm q-mt-md col-xs-12 flex text-grey">
-                        <span  class="q-px-sm bg-white">Company Details </span>
-                        <div class="line"/>
-                    </div>
-                    <div class="q-pa-sm col-xs-12 col-md-6">
-                        <q-input
-                            v-model="company_name"
-                            label="Company Name *"
-                            outlined
-                            :rules="[ val => !!val || 'Please type company name']"
                         />
                     </div>
                     <div class="q-pa-sm col-xs-12 col-md-6">
@@ -90,28 +113,7 @@
                     <div class="q-pa-sm col-xs-12 col-md-6">
                         <q-select outlined v-model="industry" :options="industries" label="Industry" />
                     </div>
-                    <div class="q-pa-sm q-px-sm q-mt-md col-xs-12 flex text-grey">
-                        <span  class="q-px-sm bg-white">Set Password </span>
-                        <div class="line"/>
-                    </div>
-                    <div class="q-pa-sm col-xs-12 col-md-6">
-                        <q-input
-                            v-model="password"
-                            label="Password *"
-                            type="password"
-                            outlined
-                            :rules="[ val => val && val.length >= 8 || 'Password must be 8 characters long', isValidPass]"
-                        />
-                    </div>
-                    <div class="q-pa-sm col-xs-12 col-md-6">
-                        <q-input
-                            v-model="password_confirm"
-                            label="Enter password again *"
-                            type="password"
-                            outlined
-                            :rules="[ val => val && password == val || `Password & Confirm password doesn't match`]"
-                        />
-                    </div>
+                    
                     <div class="q-pa-sm col-xs-12 col-md-6 text-dark">
                         <q-toggle v-model="accept" label="I accept the license and terms" />
                     </div>
@@ -131,7 +133,7 @@
 </template>
 
 <script>
-import { ionShieldCheckmarkOutline, ionCardOutline, ionCashOutline } from '@quasar/extras/ionicons-v5'
+import { ionShieldCheckmarkOutline, ionPeople, ionCashOutline } from '@quasar/extras/ionicons-v5'
 
 export default {
   name: 'Form',
@@ -194,7 +196,7 @@ export default {
             "Other"
         ],
         accept: true,
-        file: "",
+        file: [],
         status : null,
         loading : false        
       }
@@ -202,7 +204,7 @@ export default {
   created () {
     this.ionCashOutline = ionCashOutline
     this.fasShieldAlt = ionShieldCheckmarkOutline
-    this.fasIdCardAlt = ionCardOutline
+    this.ionPeople = ionPeople
   },
   methods: {
     onSubmit () {
@@ -214,14 +216,15 @@ export default {
           icon: 'warning',
           message: 'You need to accept the license and terms first'
         })
-      }else if (this.file.length == 0){
-          this.$q.notify({
-          type: 'negative',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to upload a company logo',
-        })
       }
+    //   else if (this.file.length == 0){
+    //       this.$q.notify({
+    //       type: 'negative',
+    //       textColor: 'white',
+    //       icon: 'warning',
+    //       message: 'You need to upload a company logo',
+    //     })
+    //   }
       else {
             let form = new FormData()
             form.append('first_name', this.first_name)
@@ -251,7 +254,7 @@ export default {
           })
           .then( response => {
               let resp = response.clone()
-              console.log('resp', resp)
+            //   console.log('resp', resp)
                 this.status = resp.status
                 return resp.json();
           })
@@ -289,6 +292,9 @@ export default {
                 })
               }
               this.loading = false
+                setTimeout(()=>{
+                    this.$router.push('registration-success')
+                },1000)
           })
           .catch( () => {
                 this.$q.notify({

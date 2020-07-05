@@ -1,47 +1,46 @@
 <template>
     <q-page class="flex flex-center bg-main-image">
         <div class="form-wrapper flex flex-center column bg-white rounded-borders">
-                <div class="img-container flex flex-center">
-                    <transition name="fade">
-                        <img
-                        class="image"
-                        v-if="loading"
-                        src="../assets/cog_1.gif">   
-                    </transition>
-                    <transition name="fade">
-                        <div v-if="error" class="ui-error image">
-                            <svg  viewBox="0 0 87 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="Group-2" transform="translate(2.000000, 2.000000)">
-                                        <circle id="Oval-2" stroke="rgba(252, 191, 191, .5)" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
-                                        <circle  class="ui-error-circle" stroke="#F74444" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
-                                            <path class="ui-error-line1" d="M22.244224,22 L60.4279902,60.1837662" id="Line" stroke="#E5002D" stroke-width="3" stroke-linecap="square"></path>
-                                            <path class="ui-error-line2" d="M60.755776,21 L23.244224,59.8443492" id="Line" stroke="#E5002D" stroke-width="3" stroke-linecap="square"></path>
-                                    </g>
+            <div class="img-container flex flex-center">
+                <transition name="fade">
+                    <img
+                    class="image"
+                    v-if="loading"
+                    src="../assets/cog_1.gif">   
+                </transition>
+                <transition name="fade">
+                    <div v-if="error" class="ui-error image">
+                        <svg  viewBox="0 0 87 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Group-2" transform="translate(2.000000, 2.000000)">
+                                    <circle id="Oval-2" stroke="rgba(252, 191, 191, .5)" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
+                                    <circle  class="ui-error-circle" stroke="#F74444" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
+                                        <path class="ui-error-line1" d="M22.244224,22 L60.4279902,60.1837662" id="Line" stroke="#E5002D" stroke-width="3" stroke-linecap="square"></path>
+                                        <path class="ui-error-line2" d="M60.755776,21 L23.244224,59.8443492" id="Line" stroke="#E5002D" stroke-width="3" stroke-linecap="square"></path>
                                 </g>
-                            </svg>
-                        </div>
-                    </transition>
-                    <transition name="fade">
-                        <svg version="1.1" class="checkmark image" v-if="success" :class="anim_svg ? 'anim' : ''"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 161.2 161.2" enable-background="new 0 0 161.2 161.2" xml:space="preserve">
-                        <path class="path" fill="none" stroke="#7DB0D5" stroke-miterlimit="10" d="M425.9,52.1L425.9,52.1c-2.2-2.6-6-2.6-8.3-0.1l-42.7,46.2l-14.3-16.4
-                            c-2.3-2.7-6.2-2.7-8.6-0.1c-1.9,2.1-2,5.6-0.1,7.7l17.6,20.3c0.2,0.3,0.4,0.6,0.6,0.9c1.8,2,4.4,2.5,6.6,1.4c0.7-0.3,1.4-0.8,2-1.5
-                            c0.3-0.3,0.5-0.6,0.7-0.9l46.3-50.1C427.7,57.5,427.7,54.2,425.9,52.1z"/>
-                        <circle class="path" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" cx="80.6" cy="80.6" r="62.1"/>
-                        <polyline class="path" fill="none" stroke="#7DB0D5" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="113,52.8 
-                            74.1,108.4 48.2,86.4 "/>
-
-                        <circle class="spin" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12.2175,12.2175" cx="80.6" cy="80.6" r="73.9"/>
-
+                            </g>
                         </svg>
-                    </transition>
-                </div>
-                <h5 class="text-h5">
-                    <transition name="fade">
-                        <span v-if="show">{{text}}</span>
-                    </transition>
-                </h5>
+                    </div>
+                </transition>
+                <transition name="fade">
+                    <svg version="1.1" class="checkmark image" v-if="success" :class="anim_svg ? 'anim' : ''"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 161.2 161.2" enable-background="new 0 0 161.2 161.2" xml:space="preserve">
+                    <path class="path" fill="none" stroke="#7DB0D5" stroke-miterlimit="10" d="M425.9,52.1L425.9,52.1c-2.2-2.6-6-2.6-8.3-0.1l-42.7,46.2l-14.3-16.4
+                        c-2.3-2.7-6.2-2.7-8.6-0.1c-1.9,2.1-2,5.6-0.1,7.7l17.6,20.3c0.2,0.3,0.4,0.6,0.6,0.9c1.8,2,4.4,2.5,6.6,1.4c0.7-0.3,1.4-0.8,2-1.5
+                        c0.3-0.3,0.5-0.6,0.7-0.9l46.3-50.1C427.7,57.5,427.7,54.2,425.9,52.1z"/>
+                    <circle class="path" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" cx="80.6" cy="80.6" r="62.1"/>
+                    <polyline class="path" fill="none" stroke="#7DB0D5" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="113,52.8 
+                        74.1,108.4 48.2,86.4 "/>
+
+                    <circle class="spin" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12.2175,12.2175" cx="80.6" cy="80.6" r="73.9"/>
+
+                    </svg>
+                </transition>
+            </div>
+            <h5 class="text-h5">
+                <span v-html="text" v-if="show"></span>
+            </h5>
+            <span v-html="redirectText" v-if="showRedirect"></span>
         </div>
     </q-page>
 </template>
@@ -63,7 +62,10 @@ export default {
                 'Setting up your company ...',
                 'Creating admin profile ...',
                 'Setting up database ...'
-            ]
+            ],
+            showRedirect : false,
+            redirectUrl : 'https://app.nezohr.com/login?company=',
+            redirectText:''
         }
     },
     beforeCreate(){
@@ -112,18 +114,15 @@ export default {
                 this.success = true
                 this.anim_svg = true
                 clearInterval(this.refreshIntervalId)
-                this.text = 'Your Account is Ready'
+                this.text = 'Email verified successfully'
                 this.show = true
 
-                this.$q.notify({
-                    type: 'positive',
-                    textColor: 'white',
-                    message: 'Go to log in page ? ',
-                    timeout : 0,
-                    actions:[ { label: 'Yes', color: 'white', handler: () => { 
-                        window.location.href = `https://app.nezohr.com/login?company=${res.name}`;
-                     } } ]
-                })
+                this.redirectUrl += res.name
+                this.redirectText = `You will be redirected to the login page. If you are not redirected, <a href="${this.redirectUrl}">click here</a>`
+                this.showRedirect = true
+                setInterval(()=>{
+                    window.location.href = this.redirectUrl;
+                },2000)
               }
           })
           .catch( () => {
@@ -192,7 +191,9 @@ export default {
     height: 32px;
     color: #2f2d2b;
 }
-
+a{
+    color: var(--q-color-secondary);
+}
 .checkmark {
   width: 200px;
   margin: 0 auto;
