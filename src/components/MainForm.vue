@@ -282,19 +282,11 @@ export default {
                         actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
                     })
                 }
+                this.loading = false
               }else{
-                const dismissed = this.$q.notify({
-                    type: 'positive',
-                    textColor: 'white',
-                    message: res.message,
-                    timeout: 0,
-                    actions:[ { label: 'Okay', color: 'white', handler: () => { dismissed() } } ]
-                })
+                this.$router.push('/registration-success-page')
+
               }
-              this.loading = false
-                setTimeout(()=>{
-                    this.$router.push('registration-success')
-                },1000)
           })
           .catch( () => {
                 this.$q.notify({

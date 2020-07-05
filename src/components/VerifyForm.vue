@@ -122,7 +122,7 @@ export default {
                 this.showRedirect = true
                 setInterval(()=>{
                     window.location.href = this.redirectUrl;
-                },2000)
+                },7000)
               }
           })
           .catch( () => {
